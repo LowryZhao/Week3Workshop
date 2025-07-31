@@ -2,6 +2,9 @@ $(document).ready(function () {
   $('#loginForm').submit(function (event) {
     event.preventDefault();
 
+    $('#errormsg').addClass('hidemessage').removeClass('showmessage error');
+    $('#successmsg').addClass('hidemessage').removeClass('showmessage success');
+
     const email = $('#email').val();
     const password = $('#password').val();
 
