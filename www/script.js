@@ -25,11 +25,13 @@ $(document).ready(function () {
       dataType: 'json',
       success: function (response) {
         if (response.valid === true) {
-          console.log("good");
-          $("#result").html("We got a response: " + response.data);
+          $('#successmsg').removeClass('hidemessage').addClass('showmessage success');
+          $('#errormsg').addClass('hidemessage').removeClass('showmessage');
         } else {
-          $("#result").html("We got an invalid response.");
+          $('#errormsg').removeClass('hidemessage').addClass('showmessage error');
+          $('#successmsg').addClass('hidemessage').removeClass('showmessage');
         }
+        $('#result').html('Response: ' + (response.data || 'No data'));
       },
       error: function (e) {
         alert("Error!")
