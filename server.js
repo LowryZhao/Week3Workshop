@@ -29,16 +29,17 @@ app.get('/account', function(req,res){
     console.log("Successfully: ", filepath)
 });
 
-app.post('/api/loginform',function(req,res){
-    let response = {};
+app.post('/api/loginform', function (req, res) {
+    if (!req.body) {
+        console.log('Error: No request body');
+        return res.sendStatus(400);
+    }
 
-        if (!req.body) {
-            console.log('error');
-          return res.sendStatus(400);
-        }
+    const { email, password } = req.body;
+    console.log('Received request body:', req.body);
 
-        console.log(req.body);
-            response.data = req.body.data;
-            response.valid = true;
-            res.send(response);
+    const isValid = users.some(user => user.email === email && user.password === password);
+    console.log('Validation result:', { email, password, isValid }); 
+
+    res.json({ valid: isValid, data: isValid ? 'Login successful' : 'User do not match' });
 });
